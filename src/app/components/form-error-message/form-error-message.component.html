@@ -1,0 +1,10 @@
+<ng-container *ngFor="let validation of errorMessages">
+  <ion-text 
+    padding
+    color="danger"
+    class="error-message"
+    *ngIf="formControl.hasError(validation.type) && (formControl.dirty || formControl.touched)"
+  >
+    {{ validation.message }}
+  </ion-text>
+</ng-container>

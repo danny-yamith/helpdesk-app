@@ -1,0 +1,55 @@
+<ion-content>
+  <form [formGroup]="loginForm">
+    <ion-grid>
+      <ion-row color="primary">
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Login</h3>
+          </div>
+
+          <div padding>
+            <ion-item>
+              <ion-input
+                name="username"
+                type="text"
+                placeholder="Nombre de usuario"
+                formControlName="username"
+              ></ion-input>
+            </ion-item>
+
+            <qs-form-error-message 
+              [errorMessages]="validationMessages.username"
+              [control]="loginForm.get('username')"
+            ></qs-form-error-message>
+          </div>
+
+          <div padding>
+            <ion-item>
+              <ion-input
+                name="email"
+                type="password"
+                placeholder="Contraseña"
+                formControlName="password"
+              ></ion-input>
+            </ion-item>
+
+            <qs-form-error-message 
+              [errorMessages]="validationMessages.password"
+              [control]="loginForm.get('password')"
+            ></qs-form-error-message>
+          </div>
+
+          <div padding>
+            <ion-button 
+              type="button" 
+              expand="block"
+              (click)="logIn()"
+            >
+              Login
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
