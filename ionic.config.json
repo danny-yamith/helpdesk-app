@@ -1,5 +1,7 @@
 {
   "name": "hlp-app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

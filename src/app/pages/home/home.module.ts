@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { IonicModule } from '@ionic/angular'
+import { FormsModule } from '@angular/forms'
+import { RouterModule } from '@angular/router'
 
-import { HomePage } from './home.page';
+import { HomePage } from './home.page'
 
 @NgModule({
   imports: [
@@ -14,7 +14,19 @@ import { HomePage } from './home.page';
     RouterModule.forChild([
       {
         path: '',
-        component: HomePage
+        component: HomePage,
+        children: [
+          {
+            path: 'tasks',
+            loadChildren: () => import('./tasks/tasks.module')
+              .then(m => m.TasksPageModule)
+          },
+          {
+            path: '',
+            redirectTo: 'tasks',
+            pathMatch: 'full'
+          },
+        ]
       }
     ])
   ],

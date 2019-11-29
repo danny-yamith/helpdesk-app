@@ -1,0 +1,76 @@
+<ion-content>
+  <ion-refresher 
+    slot="fixed" 
+    id="refresher" 
+    #refresher 
+    (ionRefresh)="loadData()"
+    pullMin="140" pullMax="150"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="openTasks$ | async as tasks">
+    <ion-list-header>
+      <ion-label>Por Cerrar</ion-label>
+    </ion-list-header>
+    <ng-container *ngIf="tasks.length > 0; else noItems">
+      <ion-item *ngFor="let task of tasks">
+        <ion-label>
+            <h2>{{ task.requestSubject }}</h2>
+            <p>Fecha de registro: {{ task.spanRegistrationDate | date:'medium' }}</p>
+        </ion-label>
+
+        <ion-button 
+          slot="end" 
+          *ngIf="workingSpanId != task.spanId"
+          (click)="close(task.spanId)"
+        >
+          Cerrar
+        </ion-button>
+        <ion-spinner *ngIf="workingSpanId == task.spanId">
+        </ion-spinner>
+      </ion-item>
+    </ng-container>
+
+    <ng-template #noItems>
+      <ion-item>
+        <ion-label>
+          No hay pendientes por cerrar
+        </ion-label>
+      </ion-item>
+    </ng-template>
+  </ion-list>
+
+  <ion-list *ngIf="closedTasks$ | async as tasks">
+    <ion-list-header>
+      <ion-label>Por Reabrir</ion-label>
+    </ion-list-header>
+    <ng-container *ngIf="tasks.length > 0; else noItems">
+      <ion-item *ngFor="let task of tasks">
+        <ion-label>
+            <h2>{{ task.requestSubject }}</h2>
+            <p>Fecha de registro: {{ task.requestRegistrationDate | date:'medium' }}</p>
+        </ion-label>
+
+        <ion-button 
+          slot="end" 
+          *ngIf="workingRequestId != task.requestId"
+          (click)="open(task.requestId)"
+        >
+          Abrir
+        </ion-button>
+        
+        <ion-spinner *ngIf="workingRequestId == task.requestId">
+        </ion-spinner>
+      </ion-item>
+    </ng-container>
+
+    <ng-template #noItems>
+      <ion-item>
+        <ion-label>
+          No hay pendientes por abrir
+        </ion-label>
+      </ion-item>
+    </ng-template>
+  </ion-list>
+</ion-content>

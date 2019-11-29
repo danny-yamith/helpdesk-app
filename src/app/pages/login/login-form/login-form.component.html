@@ -1,19 +1,21 @@
 <ion-content>
   <form [formGroup]="loginForm">
     <ion-grid>
-      <ion-row color="primary">
+      <ion-row color="primary" ion-align-items-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <div text-center>
-            <h3>Login</h3>
+          <div text-center class="title">
+            <h3>Iniciar sesión</h3>
+            {{ isLogedIn$ | async }}
           </div>
 
           <div padding>
             <ion-item>
               <ion-input
                 name="username"
-                type="text"
+                type="url"
                 placeholder="Nombre de usuario"
                 formControlName="username"
+                autocapitalize="none"
               ></ion-input>
             </ion-item>
 
@@ -45,7 +47,7 @@
               expand="block"
               (click)="logIn()"
             >
-              Login
+              ingresar
             </ion-button>
           </div>
         </ion-col>
